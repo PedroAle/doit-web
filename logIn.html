@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Do it</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <script src="../docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="../carousel.css" rel="stylesheet">
+
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <nav class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="doit" class="navbar-brand" href="home.html">DO IT!</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class= "navbar-nav navbar-right">
+        <li><a class="navbar-brand" href="signUp.html"><span class="glyphicon glyphicon-user"></span>Registrarse</a></li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
+  <!-- PANEL -->
+
+  <div class="col-sm-4 col-sm-offset-4">
+  <div class="panel panel-default" id="panel">
+    <div class="panel-heading"><h2 align="center">Inicia sesión en DO IT!</h2></div>
+    <div class="panel-body ">
+
+        <div id="loginForm">
+
+        <div class="form-group col-sm-15">
+          <label for="inputUser">Nombre Usuario</label>
+          <input type="text" class="form-control" id="usuario" placeholder="Usuario">
+        </div>
+
+        <div class="form-group col-sm-15">
+          <label for="inputPassword">Contraseña</label>
+          <input type="password" class="form-control" id="password" placeholder="Contraseña">
+        </div>
+
+
+        <div align="center" class="form col-sm-15">
+        <button  class="btn btn-md" onclick="SubForm();">Iniciar Sesion</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../docs/assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/logIn.js"> </script>
+
+  </body>
+</html>
