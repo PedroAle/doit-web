@@ -3,6 +3,11 @@ body {
     border: 0 !important;
 }
 
+#Title , #Description{
+    width: 210px;
+    margin: 1px 5px;
+}
+
 .navbar {
   background-color: #34495e  ;
   padding: 10px;
