@@ -5,7 +5,32 @@ body {
 
 #Title , #Description{
     width: 210px;
-    margin: 1px 5px;
+    margin: 3px 5px;
+    border-radius: 5px;
+}
+
+#datepicker{
+  width: 100px;
+  margin: 3px 60px;
+  border-radius:5px;
+}
+
+#button{
+  width: 100px;
+  height: 35px;
+  margin: 1px 5px;
+  border-radius: 5px;
+  background-color: #374a5d;
+  color: #fff;
+}
+
+#button2{
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #374a5d;
+  color: #fff;
+  margin: 1px 5px;
 }
 
 .navbar {
@@ -52,7 +77,7 @@ a:hover{
   width: 250px;
   margin: 0 5px;
   background-color: #e3e3e3;
-  height: 240px;
+  min-height: 240px;
   border-radius: 10px;
 }
 

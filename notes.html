@@ -56,11 +56,21 @@
           <form id="todo-form">
             <input id="Title" type="text" placeholder="Title" />
             <textarea id="Description" placeholder="Description"></textarea>
+            <input type="text" id="datepicker" placeholder="Due Date"/>
+          </form>
+          <button id="button" >Add Task</button>
+          <button id="button2">Clear Data</button>
           </form>
         </div>
 
 	          <script type="text/javascript" src="js/jquery.min.js"></script>
             <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="js/jquery.ui.min.js"></script>
+
+            <script type="text/javascript">
+                $( "#datepicker" ).datepicker();
+                $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
+            </script>
 
         </div>
 
