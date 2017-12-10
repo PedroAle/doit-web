@@ -1,3 +1,7 @@
+/* nanoscrollbar */
+.nano .pane   { background: #888; }
+.nano .slider { background: #111; }
+
 body {
     background-color: #374a5d !important;
     border: 0 !important;
@@ -16,21 +20,22 @@ body {
 }
 
 #button{
-  width: 100px;
+  width: 90px;
   height: 35px;
-  margin: 1px 5px;
+  margin: 10px 60px;
   border-radius: 5px;
   background-color: #374a5d;
   color: #fff;
 }
 
 #button2{
-  width: 100px;
+  width: 90px;
   height: 35px;
   border-radius: 5px;
   background-color: #374a5d;
   color: #fff;
-  margin: 1px 5px;
+  margin: 0px 60px;
+  margin-bottom: 10px;
 }
 
 .navbar {
@@ -84,6 +89,27 @@ a:hover{
 .panel input, .panel textarea{
     width: 240px;
     margin: 1px 5px;
+}
+
+.todo-task{
+    border-radius: 5px;
+    background-color: #fff;
+    width: 215px;
+    padding: 5px;
+    margin: 1px 1px;
+}
+
+.todo-task > .task-header{
+    font-weight: bold;
+}
+
+.todo-task > .task-date{
+    font-size: small;
+    font-style: italic;
+}
+
+.todo-task > .task-description{
+    font-size: smaller;
 }
 
 h3{

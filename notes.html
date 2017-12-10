@@ -38,15 +38,15 @@
 
       <div id="container">
 
-        <div class="col-xs-3 panel">
+        <div class="col-xs-3 panel" id="pending">
           <h3>Pending</h3>
         </div>
 
-        <div class="col-xs-3 panel">
+        <div class="col-xs-3 panel" id="inProgress">
           <h3>In Progress</h3>
         </div>
 
-        <div class="col-xs-3 panel">
+        <div class="col-xs-3 panel" id="completed">
           <h3>Completed</h3>
         </div>
 
@@ -56,22 +56,22 @@
           <form id="todo-form">
             <input id="Title" type="text" placeholder="Title" />
             <textarea id="Description" placeholder="Description"></textarea>
-
             <input type="text" id="datepicker" placeholder="Due Date"/>
-          </form>
-          <button id="button" >Add Task</button>
-          <button id="button2">Clear Data</button>
-          </form>
+            <input id="button" type="button" value="Add Task" onclick="todo.add();"/>
+	  </form>
+	    <input id="button2" type="button" value="Clear Data" onclick=""/>          
+         
         </div>
 
 	          <script type="text/javascript" src="js/jquery.min.js"></script>
             <script type="text/javascript" src="js/bootstrap.min.js"></script>
             <script type="text/javascript" src="js/jquery.ui.min.js"></script>
+            <script type="text/javascript" src="js/notes.js"></script>
 
             <script type="text/javascript">
                 $( "#datepicker" ).datepicker();
                 $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
-            </script>
+	    </script>
 
         </div>
 
