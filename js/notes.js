@@ -140,6 +140,12 @@ data = data || {};
         });
     };
 
+    todo.clear = function () {
+        $('#Title').val("");
+	$('#Description').val("");
+	$('#datepicker').val("");
+    };
+
     
 
 })(todo, data, jQuery);
