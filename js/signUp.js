@@ -15,7 +15,7 @@
 					//Con stringify nos aseguramos de que se vuelva un JSON valido (Aqui solo lo imprimimos pero en el ajax si lo cambiamos)
 					console.log(JSON.stringify(data));
 					$.ajax({
-						url:'http://doit-api.herokuapp.com/users',
+						url:'https://api-doit.herokuapp.com/users/register',
 						type:'POST',
 						//SUPER IMPORTANTE ESTOS DOS ATRIBUTOS (contentType y dataType)
 						contentType: "application/json; charset=utf-8",

@@ -7,7 +7,7 @@
           //Con stringify nos aseguramos de que se vuelva un JSON valido (Aqui solo lo imprimimos pero en el ajax si lo cambiamos)
           console.log(JSON.stringify(data));
           $.ajax({
-            url:'https://doit-api.herokuapp.com/login',
+            url:'https://api-doit.herokuapp.com/login',
             type:'post',
             //SUPER IMPORTANTE ESTOS DOS ATRIBUTOS (contentType y dataType)
             contentType: "application/json; charset=utf-8",
@@ -18,7 +18,7 @@
               //Este objeto data es la respuesta JSON del servidor, que devuelve el JSON del usuario que se acaba de loggear
                 console.log(data);
                 alert("Iniciaste sesión");
-                window.location.href = "home.html";
+                window.location.href = "notes.html";
             },
             error: function(data) {
               alert("Nombre de usuario o contraseña invalido")}
