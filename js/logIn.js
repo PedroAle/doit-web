@@ -30,6 +30,87 @@ function SubForm () {
 
 function validarForm(){
 
-  //arreglar
+  var username = $("#usuario").val();
+  var checkUsuario = /([A-Za-z]+[0-9])|([A-Za-z])/;
+  var noEspecialesUs = /([A-Za-z]|([0-9]))/;
+  $(document).trigger("clear-alert-id.usuario");
+  if (username.length < 1) {
+    $(document).trigger("set-alert-id-usuario", [
+    {
+      message: "Debe ingresar un usuario",
+      priority: "error"
+    }
+    ]);
+    $('#usuario').val("");
+  }else if (!username.match(noEspecialesUs)) {
+    $(document).trigger("set-alert-id-usuario", [
+    {
+      message: "No se aceptan caracteres especiales",
+      priority: "error"
+    }
+    ]);
+    $('#usuario').val("");
+  }else if(!username.match(checkUsuario)) {
+      $(document).trigger("set-alert-id-usuario", [
+      {
+        message: "Solo se aceptan letras o letras y numeros",
+        priority: "error"
+      }
+      ]);
+      $('#usuario').val("");
+
+  }else if (username.length < 6) {
+  $(document).trigger("set-alert-id-usuario", [
+  {
+    message: "Debe ingresar al menos 6 caracteres",
+    priority: "error"
+  }
+  ]);
+
+  }
+
+  <!---------------------------------------------------------------------------------------------------------------->
+
+  var password = $('#password').val();
+  var checkPassword = /([A-Za-z]+[0-9])|([A-Za-z])|([0-9])/;
+  $(document).trigger("clear-alert-id.password");
+  if (password.length < 1) {
+    $(document).trigger("set-alert-id-password", [
+    {
+      message: "Debe ingresar una contrase;a",
+      priority: "error"
+    }
+    ]);
+    $('#password').val("");
+  }else if ((password.length < 8) && (password.match(checkPassword))) {
+    $(document).trigger("set-alert-id-password", [
+    {
+      message: "Debe ingresar al menos 8 caracteres",
+      priority: "error"
+    }
+    ]);
+    $('#password').val("");
+  }else if ((password.length < 8) && (!password.match(checkPassword))) {
+    $(document).trigger("set-alert-id-password", [
+    {
+      message: "Debe ingresar al menos 8 caracteres. No se aceptan caracteres especiales",
+      priority: "error"
+    }
+    ]);
+    $('#password').val("");
+  }else{
+      var password = $('#password').val();
+      if(!password.match(checkPassword)) {
+        $(document).trigger("set-alert-id-password", [
+        {
+          message: "Solo se aceptan letras o numeros",
+          priority: "error"
+        }
+        ]);
+        $('#password').val("");
+      }
+    }
+
+<!---------------------------------------------------------------------------------------------------------------->
 
 }
