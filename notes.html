@@ -1,79 +1,99 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
-
-        <title>Do it</title>
-
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/jquery.ui.min.css" />
-        <link rel="stylesheet" href="css/notes.css" />
-    </head>
-
-    <body class="well">
-
-    <!--Navbar..............................................-->
-      <nav class="navbar navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a id="doit" class="navbar-brand" href="index.html">username</a>
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class= "navbar-nav navbar-right">
-              <li ><a class="navbar-brand" href="home.html"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>
-            </ul>
-          </div>
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head >
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Do it</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link href="css/notes.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+  <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+  <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h1 id="perfil">Perfil</h1>
+        <h4>Numbre de Usuario</h4>
+        <h4>Nombre</h4>
+        <h4>Apellido</h4>
+      </div>
+      <ul class="list-unstyled components">
+        <li>
+          <a id="botonC" href="home.html"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Page Content Holder -->
+    <div id="content">
+      <div class="container-fluid"> 
+        <div class="navbar-header">
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-      </nav>
-    <!--End of the Navbar..................................-->
-
-      <div id="container">
-
-        <div class="col-xs-3 panel" id="pending">
-          <h3>Pending</h3>
+      </div>
+    </div>
+    <div id="notas" ng-controller="TodoController">
+      <h2 align="center">Things To Do</h2>
+      <div id="inputs" class="row">
+        <div class = "col-lg-3">
+          <input maxlength="255" id="minisquare" class="form-control" type="text" ng-model="input" placeholder="Title">
+          <span id="alert" data-alertid="titulo"></span>
         </div>
-
-        <div class="col-xs-3 panel" id="inProgress">
-          <h3>In Progress</h3>
+        <div class = "col-lg-5">
+          <input maxlength="255" id="square" class="form-control" type="text" ng-model="input1" placeholder="Description">
         </div>
-
-        <div class="col-xs-3 panel" id="completed">
-          <h3>Completed</h3>
+        <div class = "col-lg-3">
+          <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="date" ng-model="input2"/>
         </div>
-
-
-        <div class="col-xs-3 panel">
-          <h3>Add a task</h3>
-          <form id="todo-form">
-            <input id="Title" type="text" placeholder="Title" />
-            <textarea id="Description" placeholder="Description"></textarea>
-            <input type="text" id="datepicker" placeholder="Due Date"/>
-            <input id="button" type="button" value="Add Task" onclick="todo.add();"/>
-	  </form>
-	    <input id="button2" type="button" value="Clear Data" onclick="todo.clear();"/>          
-         
+        <div class="col-lg-1">
+          <button ng-click="add(input,input1,input2)" class="btn btn-block">Add Todo</button>
         </div>
-
-	          <script type="text/javascript" src="js/jquery.min.js"></script>
-            <script type="text/javascript" src="js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="js/jquery.ui.min.js"></script>
-            <script type="text/javascript" src="js/notes.js"></script>
-
-            <script type="text/javascript">
-                $( "#datepicker" ).datepicker();
-                $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
-	    </script>
-
-        </div>
-
-    </body>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="todo in todos">
+          <button ng-click="remove(todo)" class="btn glyphicon glyphicon-remove"></button>
+          <button ng-click="editing = editing ? null : todo" class="btn glyphicon glyphicon-pencil"></button>
+          <input type="checkbox" ng-model="todo.done"/>
+          <center><span class="done-{{todo.done}}" id="Tittle" ng-if="editing !== todo">{{ todo.title }}</span></center><br>
+          <center><span class="done-{{todo.done}}" id="Description" ng-if="editing !== todo">{{ todo.description }}</span></center><br>
+          <center><span class="done-{{todo.done}}" id="Date" ng-if="editing !== todo">{{ todo.date }}</span></center>
+          <input ng-if="editing !== null" type="text" ng-model="todo.title">
+          <input ng-if="editing !== null" type="text" ng-model="todo.description">
+          <input ng-if="editing !== null" type="date" ng-model="todo.date">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>       
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+  <script type="text/javascript" src="js/todo.js"></script>
+  <script type="text/javascript" src="js/menu.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="js/prettify.js"></script>
+  <script src="js/jquery.bsFormAlerts.js"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      date_input.datepicker({
+        format: 'dd/mm/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      })
+    })
+  </script>
+</body>
 </html>

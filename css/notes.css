@@ -1,58 +1,70 @@
-/* nanoscrollbar */
-.nano .pane   { background: #888; }
-.nano .slider { background: #111; }
-
 body {
-    background-color: #374a5d !important;
-    border: 0 !important;
-}
-
-#Title , #Description{
-    width: 210px;
-    margin: 3px 5px;
-    border-radius: 5px;
-}
-
-#datepicker{
-  width: 100px;
-  margin: 3px 60px;
-  border-radius:5px;
-}
-
-#button{
-  width: 90px;
-  height: 35px;
-  margin: 10px 60px;
-  border-radius: 5px;
-  background-color: #374a5d;
-  color: #fff;
-}
-
-#button2{
-  width: 90px;
-  height: 35px;
-  border-radius: 5px;
-  background-color: #374a5d;
-  color: #fff;
-  margin: 0px 60px;
-  margin-bottom: 10px;
-}
-
-.navbar {
-  background-color: #34495e  ;
   padding: 10px;
+  background-color: #374a5d !important;
+}
+#Tittle{
+  font-size: 20px;
+  font-weight: bold;
+
+}
+#Description{
+  font-size: 18px;
+
+}
+#Date{
+  font-size: 15px;
+  font-weight: bold;
+
 }
 
-.icon-bar{
-  background-color: #ffffff;
+#minisquare{
+  margin-top: 15px;
+  /*width: 200px;
+  display: inline;
+  margin-bottom: 30px;*/
+}
+#date{
+  margin-top: 15px;
+  /*width: 200px;
+  display: inline;*/
+}
+#square{
+  margin-top: 15px;
+  /*width: 500px;
+  display: inline;*/
+}
+.btn-block{
+  margin-top: 15px;
+  width: 100px;
+  background-color: #374a5d;
+  color: white;
+  border-color: white;
+  margin-bottom: 30px;
 }
 
+.btn-block:hover{
+  color: #85c1e9;
+}
+
+li input[type="checkbox"] {
+  width: 20px;
+}
+
+.done-true {
+  text-decoration: line-through;
+  color:gray;
+}
+
+h2{
+  font-size: 40px;
+  color: white;
+}
 
 li {
   list-style: none;
 }
 
-a{
+a {
   color: #FFFFFF;
 }
 
@@ -60,58 +72,118 @@ a:hover{
   color: #85c1e9;
 }
 
-#div{
-  margin-top: 15px;
+#inputs{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#doit{
-  font-size: 25px;
+#notas{
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#container{
-    margin: 0 auto;
-    min-height: 100%;
-    background-color: transparent;
-    border: 0;
-    margin-top: 200px;
-    margin-left: 125px;
+#alert{
+  font-size: 18px;
 }
 
-.panel{
-  margin-top: 0 auto;
-  width: 250px;
-  margin: 0 5px;
-  background-color: #e3e3e3;
-  min-height: 240px;
-  border-radius: 10px;
+h4{
+  text-align: center;
 }
 
-.panel input, .panel textarea{
-    width: 240px;
-    margin: 1px 5px;
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
-.todo-task{
+.btn{
+  box-shadow: none;
+    outline: none !important;
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    perspective: 1000px;
+}
+
+#sidebar {
+    min-width: 240px;
+    max-width: 240px;
+    background: white;
+    color: #374a5d;
     border-radius: 5px;
-    background-color: #fff;
-    width: 215px;
-    padding: 5px;
-    margin: 1px 1px;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
 }
 
-.todo-task > .task-header{
-    font-weight: bold;
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
 }
 
-.todo-task > .task-date{
-    font-size: small;
-    font-style: italic;
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
 }
 
-.todo-task > .task-description{
-    font-size: smaller;
-}
-
-h3{
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.4em;
+    display: block;
     text-align: center;
 }
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+    border-radius: 20px;
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #555;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+    transition-delay: 0.2s;
+}
+
+#sidebarCollapse span:first-of-type {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+    opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+
+
+#sidebarCollapse.active span {
+    transform: none;
+    opacity: 1;
+    margin: 5px auto;
+}
+

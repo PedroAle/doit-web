@@ -11,16 +11,11 @@
 
     <title>Do it</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <script src="../docs/assets/js/ie-emulation-modes-warning.js"></script>
-    <link href="../carousel.css" rel="stylesheet">
-
-  </head>
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+</head>
 <!-- NAVBAR
 ================================================== -->
   <body>
@@ -44,81 +39,131 @@
 
   <!-- PANEL -->
 
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-4 col-sm-offset-4">
   <div class="panel panel-default">
     <div class="panel-heading"><h2 align="center">Crea tu cuenta en DO IT!</h2></div>
     <div class="panel-body ">
 
         <div id="loginForm">
 
-          <div class="form-group col-sm-6">
+          <div class="form-group col-sm-12">
+
             <label>Nombres</label>
-            <input maxlength="50" type="text" class="form-control" id="nombre" placeholder="Nombres">
-          </div>
-          <div class="form-group col-sm-6" >
-            <label>Apellidos</label>
-            <input maxlength="50" type="text" class="form-control col-sm-6" id="apellido" placeholder="Apellidos">
+            <div class="bootstrap-iso">
+                  <input maxlength="50" type="text" class="form-control" id="nombre" placeholder="Nombres">
+            </div>
+            <span data-alertid="nombre"></span>
+
           </div>
 
-        <div id="div" class="form-group col-sm-6">
+          <div class="form-group col-sm-12" >
+
+            <label>Apellidos</label>
+            <div class="bootstrap-iso">
+                  <input maxlength="50" type="text" class="form-control col-sm-6" id="apellido" placeholder="Apellidos">
+            </div>
+            <span data-alertid="apellido"></span>
+
+          </div>
+
+        <div class="form-group col-sm-12">
 
           <label for="inputUser">Nombre de Usuario</label>
-
-          <input maxlength="50" type="text" class="form-control" id="usuario" placeholder="Usuario">
-
-        </div>
-
-
-        <div id="div" class="form col-md-6">
-
-          <label>Fecha de Nacimiento</label>
-
-          <div class="form col-md-6">
-            <div class="form col-xs-11">
-              <input maxlength="2" type="text" class="form-control" id="day" placeholder="dd">
+          <div class="bootstrap-iso">
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </div>
+              <input maxlength="50" type="text" class="form-control" id="usuario" placeholder="Usuario">
             </div>
-            <div class="form col-xs-11">
-              <input maxlength="2" type="text" class="form-control" id="month" placeholder="mm">
-            </div>
-            <div class="form col-xs-11">
-              <input maxlength="4" type="text" class="form-control" id="year" placeholder="yyyy">
-            </div>
+            <span data-alertid="usuario"></span>
           </div>
 
+        </div>
+
+
+        <div class="form-group col-md-12">
+
+          <label>Fecha de Nacimiento</label>
+          <div class="bootstrap-iso">
+            <form class="form-horizontal" method="post">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
+              </div>
+              <span data-alertid="fecha"></span>
+            </form>
+          </div>
 
         </div>
 
-        <div id="div" class="form-group col-sm-6">
-          <label for="inputPassword">Contraseña</label>
-          <input maxlength="50" type="password" class="form-control" id="password" placeholder="Contraseña(minimo 8 caracteres)">
+
+          <div class="form-group col-sm-12">
+
+            <label for="inputPassword">Contraseña</label>
+            <div class="bootstrap-iso">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-lock"></i>
+                </div>
+                <input maxlength="50" type="password" class="form-control" id="password" placeholder="Contraseña(min 8 caracteres)">
+              </div>
+              <span data-alertid="password"></span>
+            </div>
+
+
         </div>
 
-        <div id="div" class="form-group col-sm-6">
-        <label for="inputcpassword">Confirmar Contraseña</label>
-          <input maxlength="50" type="password" class="form-control" id="cpassword" placeholder="Contraseña(minimo 8 caracteres)">
-        </div>
+
+          <div class="form-group col-sm-12">
+
+            <label for="inputcpassword">Confirmar Contraseña</label>
+            <div class="bootstrap-iso">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-lock"></i>
+                </div>
+                <input maxlength="50" type="password" class="form-control" id="cpassword" placeholder="Contraseña(min 8 caracteres)">
+              </div>
+              <span data-alertid="cpassword"></span>
+            </div>
+
+          </div>
 
 
         <div align="center" class="form">
         <button class="btn" onclick="SubForm();">Registrarse</button>
         </div>
+        <span data-alertid="botton"></span>
       </div>
     </div>
 
     </div>
   </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../docs/assets/js/vendor/holder.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/signUp.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script src="js/prettify.js"></script>
+    <script src="js/jquery.bsFormAlerts.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+          format: 'dd/mm/yyyy',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        })
+      })
+    </script>
 
 
   </body>
