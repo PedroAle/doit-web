@@ -43,18 +43,22 @@
     <div id="notas" ng-controller="TodoController">
       <h2 align="center">Things To Do</h2>
       <div id="inputs" class="row">
-        <div class = "col-lg-3">
+        <div class = "col-lg-2">
           <input maxlength="255" id="minisquare" class="form-control" type="text" ng-model="input" placeholder="Title">
           <span id="alert" data-alertid="titulo"></span>
         </div>
-        <div class = "col-lg-5">
+        <div class = "col-lg-4">
           <input maxlength="255" id="square" class="form-control" type="text" ng-model="input1" placeholder="Description">
         </div>
         <div class = "col-lg-3">
           <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="date" ng-model="input2"/>
         </div>
+        <div class="col-lg-2">
+          <select class="form-control" id="square" ng-model="Categoria" ng-options="categoria.Id as categoria.Name for categoria in Category track by categoria.Id">
+        </select>          
+        </div>
         <div class="col-lg-1">
-          <button ng-click="add(input,input1,input2)" class="btn btn-block">Add Todo</button>
+          <button ng-click="add(input,input1,input2,Categoria)" class="btn btn-block">Add Todo</button>
         </div>
       </div>
       <ul class="list-group">
@@ -64,10 +68,11 @@
           <input type="checkbox" ng-model="todo.done"/>
           <center><span class="done-{{todo.done}}" id="Tittle" ng-if="editing !== todo">{{ todo.title }}</span></center><br>
           <center><span class="done-{{todo.done}}" id="Description" ng-if="editing !== todo">{{ todo.description }}</span></center><br>
-          <center><span class="done-{{todo.done}}" id="Date" ng-if="editing !== todo">{{ todo.date }}</span></center>
+          <center><span class="done-{{todo.done}}" id="Date" ng-if="editing !== todo">{{ todo.date }}</span></center><br>
+          <center><span class="done-{{todo.done}}"  ng-if="editing !== todo">{{ todo.category }}</span></center>
           <input ng-if="editing !== null" type="text" ng-model="todo.title">
           <input ng-if="editing !== null" type="text" ng-model="todo.description">
-          <input ng-if="editing !== null" type="date" ng-model="todo.date">
+          <input ng-if="editing !== null" type="date" ng-model="todo.date">  
         </li>
       </ul>
     </div>
@@ -75,6 +80,7 @@
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>       
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script type="text/javascript" src="js/todo.js"></script>
   <script type="text/javascript" src="js/menu.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
