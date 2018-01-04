@@ -23,6 +23,8 @@ function SubForm () {
       error: function(data) {
         if (data.status == 400) {
           alert("Usuario o Contraseña invalida");
+        }else {
+            alert("Servicio en mantenimiento. Intente mas tarde");
         }
       }
     });

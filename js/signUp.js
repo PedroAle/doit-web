@@ -1,11 +1,10 @@
-
 function SubForm () {
+	var dateSend = $("#date").val();
 	validarForm();
 	var nombre = $("#nombre").val();
 	var apellido = $("#apellido").val();
 	var username = $("#usuario").val();
-	var date = $("#date").val();
-	var arr = date.split("/");
+	var arr = dateSend.split("/");
 	var fechaDeNacimiento = (arr[2]+"-"+arr[1]+"-"+arr[0]+"T00:00:00.000Z");
 	var password = $("#password").val();
 	var formaDeRegistro = 1;
@@ -29,9 +28,11 @@ function SubForm () {
 		},
         error: function(data) {
 			if (data.status == 400) {
-	          alert("No se pudo registrar el usuario");
-	        }
-		}
+          		alert("Usuario o Contraseña invalida");
+        	}else {
+          		alert("Servicio en mantenimiento. Intente mas tarde");
+        	}
+        }
     });
 }
 
@@ -192,7 +193,7 @@ function validarForm(){
 			if (arr[2]>1998){
 				$(document).trigger("set-alert-id-fecha", [
 				    {
-						message: "A;o incorrecto",
+						message: "Año incorrecto",
 				      	priority: "error"
 				    }
 				]);
@@ -224,7 +225,7 @@ function validarForm(){
 		if (password.length < 1) {
 			$(document).trigger("set-alert-id-password", [
 				{
-					message: "Debe ingresar una contrase;a",
+					message: "Debe ingresar una contraseña",
 					priority: "error"
 				}
 			]);
@@ -266,7 +267,7 @@ function validarForm(){
 		if (password.length < 1) {
 			$(document).trigger("set-alert-id-cpassword", [
 				{
-					message: "Debe ingresar una contrase;a",
+					message: "Debe ingresar una contraseña",
 					priority: "error"
 				}
 			]);
@@ -303,7 +304,7 @@ function validarForm(){
 		if ($("#password").val()!=$("#cpassword").val()){
 			$(document).trigger("set-alert-id-cpassword", [
 				{
-					message: "No coinciden ambas contrase;as",
+					message: "No coinciden ambas contraseñas",
 					priority: "error"
 				}
 			]);
