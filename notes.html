@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html ng-app="todoApp">
 <head >
@@ -17,20 +18,20 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h1 id="perfil">Perfil</h1>
-        <h4>Numbre de Usuario</h4>
-        <h4>Nombre</h4>
-        <h4>Apellido</h4>
+        <h1 id="perfil">Welcome:</h1><br>
+        <h4 id="usuario"></h4>
+        <h4 id="nombre"></h4>
+        <h4 id="apellido"></h4>
       </div>
       <ul class="list-unstyled components">
         <li>
-          <a id="botonC" href="home.html"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a>
+          <a id="botonC" onclick="logO();" ><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a>
         </li>
       </ul>
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
-      <div class="container-fluid"> 
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" id="sidebarCollapse" class="navbar-btn">
             <span></span>
@@ -55,40 +56,42 @@
         </div>
         <div class="col-lg-2">
           <select class="form-control" id="square" ng-model="Categoria" ng-options="categoria.Id as categoria.Name for categoria in Category track by categoria.Id">
-        </select>          
+        </select>
         </div>
         <div class="col-lg-1">
-          <button ng-click="add(input,input1,input2,Categoria)" class="btn btn-block">Add Todo</button>
+          <button ng-click="add(input,input1,date,Categoria)" class="btn btn-block">Add Todo</button>
         </div>
       </div>
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="todo in todos">
           <button ng-click="remove(todo)" class="btn glyphicon glyphicon-remove"></button>
           <button ng-click="editing = editing ? null : todo" class="btn glyphicon glyphicon-pencil"></button>
-          <input type="checkbox" ng-model="todo.done"/>
+          <input type="checkbox" ng-model="todo.done" />
           <center><span class="done-{{todo.done}}" id="Tittle" ng-if="editing !== todo">{{ todo.title }}</span></center><br>
           <center><span class="done-{{todo.done}}" id="Description" ng-if="editing !== todo">{{ todo.description }}</span></center><br>
           <center><span class="done-{{todo.done}}" id="Date" ng-if="editing !== todo">{{ todo.date }}</span></center><br>
           <center><span class="done-{{todo.done}}"  ng-if="editing !== todo">{{ todo.category }}</span></center>
           <input ng-if="editing !== null" type="text" ng-model="todo.title">
           <input ng-if="editing !== null" type="text" ng-model="todo.description">
-          <input ng-if="editing !== null" type="date" ng-model="todo.date">  
+          <input ng-if="editing !== null" type="date" ng-model="todo.date">
         </li>
       </ul>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>       
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script type="text/javascript" src="js/todo.js"></script>
   <script type="text/javascript" src="js/menu.js"></script>
+  <script type="text/javascript" src="js/user.js"></script>
+  <script type="text/javascript" src="js/logOut.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/prettify.js"></script>
   <script src="js/jquery.bsFormAlerts.js"></script>
-  
+
   <script type="text/javascript">
     $(document).ready(function(){
       var date_input=$('input[name="date"]'); //our date input has the name "date"
