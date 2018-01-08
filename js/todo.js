@@ -20,6 +20,50 @@ app.controller('TodoController', function ($scope, $http) {
 
   var token =localStorage.getItem("x-auth"); //TODO: X-AUTH
 
+  $http({
+    url:"https://api-doit.herokuapp.com/tasks/me",
+    method: "GET",
+    headers: {"x-auth":token}
+  }).then(function successCallback(response) {
+    var arrayTasks = Object.values(response.data.tasks);
+    var i = 0;
+    while(arrayTasks[i]){
+      var arrayTask = arrayTasks[i];
+      var arrayTaskValues = Object.values(arrayTask);
+      var taskNombre = arrayTaskValues[2];
+      var taskDescripcion = arrayTaskValues[3];
+      var taskCategoria = arrayTaskValues[4];
+      var taskFecha = arrayTaskValues[5];
+
+      var urgente = localStorage.getItem("urgenteID");
+      var importante = localStorage.getItem("importanteID");
+      var regular = localStorage.getItem("regularID");
+
+      if(taskCategoria == regular){
+        taskCategoria = "Regular";
+      }else if (taskCategoria == importante){
+        taskCategoria = "Importante";
+      }else {
+        taskCategoria = "Urgente";
+      }
+
+      if(taskFecha == "0"){
+        $scope.todos.push({title: taskNombre , description: taskDescripcion, date: "", category: taskCategoria});
+      }else{
+        $scope.todos.push({title: taskNombre , description: taskDescripcion, date: taskFecha, category: taskCategoria});
+      }
+      i = i +1;
+    }
+
+    var todos = $scope.todos;
+    var arrayTodos = Object.values(todos);
+    console.log(arrayTodos);
+    localStorage.setItem("arrayTodos", arrayTodos);
+
+
+  }, function errorCallback(response) {
+  });
+
   $scope.todos = [  ];
 
 
@@ -118,6 +162,8 @@ app.controller('TodoController', function ($scope, $http) {
     var index = todos.indexOf(todo);
     if (index !== -1) {
       todos.splice(index, 1);
-     }
+    }
   }
+
+
 });
