@@ -160,10 +160,75 @@ app.controller('TodoController', function ($scope, $http) {
   function remove(todo) {
     var todos = $scope.todos;
     var index = todos.indexOf(todo);
+    var arrayTodo = Object.values(todo);
+    var todoNombre = arrayTodo[0];
+    var todoDescripcion = arrayTodo[1];
+    var todoFecha = arrayTodo[2];
+    var todoCategoria = arrayTodo[3];
+
+    localStorage.setItem("todoNombre", todoNombre);
+    localStorage.setItem("todoDescripcion", todoDescripcion);
+    localStorage.setItem("todoFecha", todoFecha);
+    localStorage.setItem("todoCategoria", todoCategoria);
+
+    $http({
+      url:"https://api-doit.herokuapp.com/tasks/me",
+      method: "GET",
+      headers: {"x-auth":token}
+    }).then(function successCallback(response) {
+      var arrayTasks = Object.values(response.data.tasks);
+      var i = 0;
+      var j = 0;
+
+      while((arrayTasks[i])&&(j==0)){
+        var arrayTask = arrayTasks[i];
+        var arrayTaskValues = Object.values(arrayTask);
+        var taskID = arrayTaskValues[0];
+        var taskNombre = arrayTaskValues[2];
+        var taskDescripcion = arrayTaskValues[3];
+        var taskCategoria = arrayTaskValues[4];
+        var taskFecha = arrayTaskValues[5];
+
+        var urgente = localStorage.getItem("urgenteID");
+        var importante = localStorage.getItem("importanteID");
+        var regular = localStorage.getItem("regularID");
+
+        var todoNombre =  localStorage.getItem("todoNombre");
+        var todoDescripcion =  localStorage.getItem("todoDescripcion");
+        var todoFecha =  localStorage.getItem("todoFecha");
+        var todoCategoria =  localStorage.getItem("todoCategoria");
+
+        if(taskCategoria == regular){
+          taskCategoria = "Regular";
+        }else if (taskCategoria == importante){
+          taskCategoria = "Importante";
+        }else {
+          taskCategoria = "Urgente";
+        }
+
+        if ((taskNombre == todoNombre)&&(taskDescripcion == todoDescripcion)&&(taskFecha == todoFecha)&&(taskCategoria == todoCategoria)){
+          j = 1;
+          localStorage.setItem("taskID",taskID);
+        }else {
+          j = 0;
+        }
+        i = i +1;
+      }
+    }, function errorCallback(response) {
+    });
+
     if (index !== -1) {
       todos.splice(index, 1);
+      $http({
+        url:"https://api-doit.herokuapp.com/tasks/"+localStorage.getItem("taskID"),
+        method: "DELETE",
+        headers: {"x-auth":token}
+      }).then(function successCallback(response) {
+      }, function errorCallback(response) {
+      });
+
     }
   }
 
-
 });
+
