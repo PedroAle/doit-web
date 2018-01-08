@@ -9,6 +9,7 @@ function SubForm () {
     $.ajax({
       url:'https://api-doit.herokuapp.com/login',
       type:'post',
+
       //SUPER IMPORTANTE ESTOS DOS ATRIBUTOS (contentType y dataType)
       contentType: "application/json; charset=utf-8",
       dataType: "json",
@@ -16,6 +17,15 @@ function SubForm () {
       //Aqui manejamos el caso si todo va bien y el server responde con un HTTP 2XX
       success:function(data){
         //Este objeto data es la respuesta JSON del servidor, que devuelve el JSON del usuario que se acaba de loggear
+        var array = Object.values(data);
+        var usuario = array[1];
+        var nombre = array[2];
+        var apellido = array[3];
+        var token = array[8];
+        localStorage.setItem("x-auth",token);
+        localStorage.setItem("usuario",usuario);
+        localStorage.setItem("nombre",nombre);
+        localStorage.setItem("apellido",apellido);
         console.log(data);
         alert("Iniciaste sesión");
         window.location.href = "notes.html";
@@ -23,12 +33,17 @@ function SubForm () {
       error: function(data) {
         if (data.status == 400) {
           alert("Usuario o Contraseña invalida");
-        }else {
-            alert("Servicio en mantenimiento. Intente mas tarde");
+        }else if (data.status == 403) {
+          alert("Usuario Bloqueado");
+        }else if (data.status == 429){
+          alert("Excedio el numero de intentos. Este Usuario ha sido bloqueado");
+        }else{
+          alert("Servicio en mantenimiento. Intente mas tarde");
         }
       }
     });
 }
+
 
 function validarForm(){
 
