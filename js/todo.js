@@ -1,7 +1,6 @@
 var app = angular.module('todoApp', []);
 
 app.controller('TodoController', function ($scope, $http) {
-
   $scope.input = '';
   $scope.input1 = '';
   $scope.date = '';
@@ -30,26 +29,46 @@ app.controller('TodoController', function ($scope, $http) {
     while(arrayTasks[i]){
       var arrayTask = arrayTasks[i];
       var arrayTaskValues = Object.values(arrayTask);
-      var taskNombre = arrayTaskValues[2];
-      var taskDescripcion = arrayTaskValues[3];
-      var taskCategoria = arrayTaskValues[4];
-      var taskFecha = arrayTaskValues[5];
+      var task_V = arrayTaskValues[5];
 
-      var urgente = localStorage.getItem("urgenteID");
-      var importante = localStorage.getItem("importanteID");
-      var regular = localStorage.getItem("regularID");
 
-      if(taskCategoria == regular){
-        taskCategoria = "Regular";
-      }else if (taskCategoria == importante){
-        taskCategoria = "Importante";
-      }else {
-        taskCategoria = "Urgente";
-      }
 
-      if(taskFecha == "0"){
+      if(task_V == "0"){
+        var taskNombre = arrayTaskValues[2];
+        var taskDescripcion = arrayTaskValues[3];
+        var taskCategoria = arrayTaskValues[4];
+
+        var urgente = localStorage.getItem("urgenteID");
+        var importante = localStorage.getItem("importanteID");
+        var regular = localStorage.getItem("regularID");
+
+        if(taskCategoria == regular){
+          taskCategoria = "Regular";
+        }else if (taskCategoria == importante){
+          taskCategoria = "Importante";
+        }else {
+          taskCategoria = "Urgente";
+        }
+
         $scope.todos.push({title: taskNombre , description: taskDescripcion, date: "", category: taskCategoria});
       }else{
+        var taskNombre = arrayTaskValues[2];
+        var taskDescripcion = arrayTaskValues[3];
+        var taskFecha = arrayTaskValues[4];
+        var taskCategoria = arrayTaskValues[5];
+
+        var urgente = localStorage.getItem("urgenteID");
+        var importante = localStorage.getItem("importanteID");
+        var regular = localStorage.getItem("regularID");
+
+        if(taskCategoria == regular){
+          taskCategoria = "Regular";
+        }else if (taskCategoria == importante){
+          taskCategoria = "Importante";
+        }else {
+          taskCategoria = "Urgente";
+        }
+
         $scope.todos.push({title: taskNombre , description: taskDescripcion, date: taskFecha, category: taskCategoria});
       }
       i = i +1;
@@ -62,6 +81,9 @@ app.controller('TodoController', function ($scope, $http) {
 
 
   }, function errorCallback(response) {
+    if(response.status == 400){
+      alertify.log("Usuario no posee tareas");
+    }
   });
 
   $scope.todos = [  ];
@@ -70,13 +92,14 @@ app.controller('TodoController', function ($scope, $http) {
 
   $scope.add = add;
   $scope.remove = remove;
+  $scope.completeTask = completeTask;
 
   function add(input,input1,date,Category) {
     $(document).trigger("clear-alert-id.titulo");
-    if (input.length < 1){
+    if (input.length < 3){
       $(document).trigger("set-alert-id-titulo", [
             {
-              message: "Ingrese Titulo",
+              message: "Ingrese Titulo. Al menos 3 caracteres",
               priority: "error"
             }
           ]);
@@ -138,7 +161,9 @@ app.controller('TodoController', function ($scope, $http) {
     }).then(function successCallback(response) {
     }, function errorCallback(response) {
       if(response.status == 401){
-        alert("El token no es valido");
+        alertify.error("El token no es valido");
+      }else if(response.status == 400){
+        alertify.error("No se pudo crear la tarea");
       }
     });
 
@@ -155,6 +180,8 @@ app.controller('TodoController', function ($scope, $http) {
                 Id: 'Urgente',
                 Name: 'Urgente'
             }];
+  setTimeout('window.location.href = "notes.html";',1750);
+
   }
 
   function remove(todo) {
@@ -165,6 +192,10 @@ app.controller('TodoController', function ($scope, $http) {
     var todoDescripcion = arrayTodo[1];
     var todoFecha = arrayTodo[2];
     var todoCategoria = arrayTodo[3];
+
+    $scope.todos = $scope.todos.filter(function(todo) {
+      return !todo.done
+    })
 
     localStorage.setItem("todoNombre", todoNombre);
     localStorage.setItem("todoDescripcion", todoDescripcion);
@@ -181,31 +212,59 @@ app.controller('TodoController', function ($scope, $http) {
       var j = 0;
 
       while((arrayTasks[i])&&(j==0)){
+
         var arrayTask = arrayTasks[i];
         var arrayTaskValues = Object.values(arrayTask);
         var taskID = arrayTaskValues[0];
-        var taskNombre = arrayTaskValues[2];
-        var taskDescripcion = arrayTaskValues[3];
-        var taskCategoria = arrayTaskValues[4];
-        var taskFecha = arrayTaskValues[5];
+        var task_V = arrayTaskValues[6];
 
-        var urgente = localStorage.getItem("urgenteID");
-        var importante = localStorage.getItem("importanteID");
-        var regular = localStorage.getItem("regularID");
+        if (task_V == "0") {
+          var taskNombre = arrayTaskValues[2];
+          var taskDescripcion = arrayTaskValues[3];
+          var taskFecha = arrayTaskValues[4];
+          var taskCategoria = arrayTaskValues[5];
 
-        var todoNombre =  localStorage.getItem("todoNombre");
-        var todoDescripcion =  localStorage.getItem("todoDescripcion");
-        var todoFecha =  localStorage.getItem("todoFecha");
-        var todoCategoria =  localStorage.getItem("todoCategoria");
+          var urgente = localStorage.getItem("urgenteID");
+          var importante = localStorage.getItem("importanteID");
+          var regular = localStorage.getItem("regularID");
 
-        if(taskCategoria == regular){
-          taskCategoria = "Regular";
-        }else if (taskCategoria == importante){
-          taskCategoria = "Importante";
-        }else {
-          taskCategoria = "Urgente";
+          var todoNombre =  localStorage.getItem("todoNombre");
+          var todoDescripcion =  localStorage.getItem("todoDescripcion");
+          var todoFecha =  localStorage.getItem("todoFecha");
+          var todoCategoria =  localStorage.getItem("todoCategoria");
+
+          if(taskCategoria == regular){
+            taskCategoria = "Regular";
+          }else if (taskCategoria == importante){
+            taskCategoria = "Importante";
+          }else {
+            taskCategoria = "Urgente";
+          }
+
+        }else{
+
+          var taskNombre = arrayTaskValues[2];
+          var taskDescripcion = arrayTaskValues[3];
+          var taskCategoria = arrayTaskValues[4];
+          var taskFecha = arrayTaskValues[5];
+
+          var urgente = localStorage.getItem("urgenteID");
+          var importante = localStorage.getItem("importanteID");
+          var regular = localStorage.getItem("regularID");
+
+          var todoNombre =  localStorage.getItem("todoNombre");
+          var todoDescripcion =  localStorage.getItem("todoDescripcion");
+          var todoFecha =  localStorage.getItem("todoFecha");
+          var todoCategoria =  localStorage.getItem("todoCategoria");
+
+          if(taskCategoria == regular){
+            taskCategoria = "Regular";
+          }else if (taskCategoria == importante){
+            taskCategoria = "Importante";
+          }else {
+            taskCategoria = "Urgente";
+          }
         }
-
         if ((taskNombre == todoNombre)&&(taskDescripcion == todoDescripcion)&&(taskFecha == todoFecha)&&(taskCategoria == todoCategoria)){
           j = 1;
           localStorage.setItem("taskID",taskID);
@@ -214,21 +273,143 @@ app.controller('TodoController', function ($scope, $http) {
         }
         i = i +1;
       }
+
     }, function errorCallback(response) {
     });
 
-    if (index !== -1) {
-      todos.splice(index, 1);
-      $http({
-        url:"https://api-doit.herokuapp.com/tasks/"+localStorage.getItem("taskID"),
-        method: "DELETE",
-        headers: {"x-auth":token}
-      }).then(function successCallback(response) {
-      }, function errorCallback(response) {
-      });
+      var taskID = localStorage.getItem("taskID");
+      localStorage.setItem("url",'https://api-doit.herokuapp.com/tasks/'+taskID);
+      var url = localStorage.getItem("url");
+
+        $http({
+          url:url,
+          method: "DELETE",
+          headers: {"x-auth":token}
+        }).then(function successCallback(response) {
+          //TODO: tachar;
+            window.location.href = "notes.html";
+        }, function errorCallback(response) {
+          remove(todo);
+        });
 
     }
+
+
+  function completeTask(todo) {
+
+    var todos = $scope.todos;
+    var index = todos.indexOf(todo);
+    var arrayTodo = Object.values(todo);
+    var todoNombre = arrayTodo[0];
+    var todoDescripcion = arrayTodo[1];
+    var todoFecha = arrayTodo[2];
+    var todoCategoria = arrayTodo[3];
+
+    $scope.todos = $scope.todos.filter(function(todo) {
+      return !todo.done
+    })
+
+    localStorage.setItem("todoNombre", todoNombre);
+    localStorage.setItem("todoDescripcion", todoDescripcion);
+    localStorage.setItem("todoFecha", todoFecha);
+    localStorage.setItem("todoCategoria", todoCategoria);
+
+    $http({
+      url:"https://api-doit.herokuapp.com/tasks/me",
+      method: "GET",
+      headers: {"x-auth":token}
+    }).then(function successCallback(response) {
+      var arrayTasks = Object.values(response.data.tasks);
+      var i = 0;
+      var j = 0;
+
+      while((arrayTasks[i])&&(j==0)){
+
+        var arrayTask = arrayTasks[i];
+        var arrayTaskValues = Object.values(arrayTask);
+        var taskID = arrayTaskValues[0];
+        var task_V = arrayTaskValues[6];
+
+        if (task_V == "0") {
+          var taskNombre = arrayTaskValues[2];
+          var taskDescripcion = arrayTaskValues[3];
+          var taskFecha = arrayTaskValues[4];
+          var taskCategoria = arrayTaskValues[5];
+
+          var urgente = localStorage.getItem("urgenteID");
+          var importante = localStorage.getItem("importanteID");
+          var regular = localStorage.getItem("regularID");
+
+          var todoNombre =  localStorage.getItem("todoNombre");
+          var todoDescripcion =  localStorage.getItem("todoDescripcion");
+          var todoFecha =  localStorage.getItem("todoFecha");
+          var todoCategoria =  localStorage.getItem("todoCategoria");
+
+          if(taskCategoria == regular){
+            taskCategoria = "Regular";
+          }else if (taskCategoria == importante){
+            taskCategoria = "Importante";
+          }else {
+            taskCategoria = "Urgente";
+          }
+
+        }else{
+
+          var taskNombre = arrayTaskValues[2];
+          var taskDescripcion = arrayTaskValues[3];
+          var taskCategoria = arrayTaskValues[4];
+          var taskFecha = arrayTaskValues[5];
+
+          var urgente = localStorage.getItem("urgenteID");
+          var importante = localStorage.getItem("importanteID");
+          var regular = localStorage.getItem("regularID");
+
+          var todoNombre =  localStorage.getItem("todoNombre");
+          var todoDescripcion =  localStorage.getItem("todoDescripcion");
+          var todoFecha =  localStorage.getItem("todoFecha");
+          var todoCategoria =  localStorage.getItem("todoCategoria");
+
+          if(taskCategoria == regular){
+            taskCategoria = "Regular";
+          }else if (taskCategoria == importante){
+            taskCategoria = "Importante";
+          }else {
+            taskCategoria = "Urgente";
+          }
+        }
+        if ((taskNombre == todoNombre)&&(taskDescripcion == todoDescripcion)&&(taskFecha == todoFecha)&&(taskCategoria == todoCategoria)){
+          j = 1;
+          localStorage.setItem("taskID",taskID);
+        }else {
+          j = 0;
+        }
+        i = i +1;
+      }
+
+    }, function errorCallback(response) {
+    });
+
+      var taskID = localStorage.getItem("taskID");
+      localStorage.setItem("url",'https://api-doit.herokuapp.com/tasks/'+taskID+'/complete');
+      var url = localStorage.getItem("url");
+
+        $http({
+          url:url,
+          method: "POST",
+          headers: {"x-auth":token}
+        }).then(function successCallback(response) {
+          //TODO: tachar;
+            alertify.success("Tarea Completada");
+        }, function errorCallback(response) {
+          completeTask(todo);
+        });
+
+
   }
 
-});
+  function cambiodepagina(){
+    window.location.href = "notes.html";
+  }
 
+
+});

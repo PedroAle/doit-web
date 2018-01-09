@@ -23,14 +23,14 @@ function SubForm () {
 		success:function(data){
 			//Este objeto data es la respuesta JSON del servidor, que devuelve el JSON del usuario que se acaba de loggear
 			console.log(data);
-			alert("Usuario registrado");
-			window.location.href = "home.html";
+			alertify.success("Usuario registrado");
+			setTimeout('cambiodepagina()',2000);
 		},
         error: function(data) {
 			if (data.status == 400) {
-          		alert("Usuario o Contraseña invalida");
+          		alertify.error("No se pudo registrar el usuario");
         	}else {
-          		alert("Servicio en mantenimiento. Intente mas tarde");
+          		alertify.log("Servicio en mantenimiento. Intente mas tarde");
         	}
         }
     });
@@ -149,18 +149,18 @@ function validarForm(){
 				}
 			]);
 			$('#usuario').val("");
-		}else if ((username.length < 6) && (!username.match(noEspecialesUs))) {
+		}else if ((username.length < 3) && (!username.match(noEspecialesUs))) {
 			$(document).trigger("set-alert-id-usuario", [
 				{
-					message: "Debe ingresar al menos 6 caracteres. No se aceptan caracteres especiales",
+					message: "Debe ingresar al menos 3 caracteres. No se aceptan caracteres especiales",
 					priority: "error"
 				}
 			]);
 			$('#usuario').val("");
-		}else if (username.length < 6) {
+		}else if (username.length < 3) {
 			$(document).trigger("set-alert-id-usuario", [
 				{
-					message: "Debe ingresar al menos 6 caracteres",
+					message: "Debe ingresar al menos 3 caracteres",
 					priority: "error"
 				}
 			]);
@@ -230,18 +230,18 @@ function validarForm(){
 				}
 			]);
 			$('#password').val("");
-		}else if ((password.length < 8) && (password.match(checkPassword))) {
+		}else if ((password.length < 7) && (password.match(checkPassword))) {
 			$(document).trigger("set-alert-id-password", [
 				{
-					message: "Debe ingresar al menos 8 caracteres",
+					message: "Debe ingresar al menos 7 caracteres",
 					priority: "error"
 				}
 			]);
 			$('#password').val("");
-		}else if ((password.length < 8) && (!password.match(checkPassword))) {
+		}else if ((password.length < 7) && (!password.match(checkPassword))) {
 			$(document).trigger("set-alert-id-password", [
 				{
-					message: "Debe ingresar al menos 8 caracteres. No se aceptan caracteres especiales",
+					message: "Debe ingresar al menos 7 caracteres. No se aceptan caracteres especiales",
 					priority: "error"
 				}
 			]);
@@ -272,18 +272,18 @@ function validarForm(){
 				}
 			]);
 			$('#cpassword').val("");
-		}else if ((password.length < 8) && (password.match(checkcPassword))){
+		}else if ((password.length < 7) && (password.match(checkcPassword))){
 			$(document).trigger("set-alert-id-cpassword", [
 				{
-					message: "Debe ingresar al menos 8 caracteres",
+					message: "Debe ingresar al menos 7 caracteres",
 					priority: "error"
 				}
 			]);
 			$('#cpassword').val("");
-		}else if ((password.length < 8) && (!password.match(checkcPassword))){
+		}else if ((password.length < 7) && (!password.match(checkcPassword))){
 			$(document).trigger("set-alert-id-cpassword", [
 				{
-					message: "Debe ingresar al menos 8 caracteres. No se aceptan caracteres especiales",
+					message: "Debe ingresar al menos 7 caracteres. No se aceptan caracteres especiales",
 					priority: "error"
 				}
 			]);
@@ -311,4 +311,8 @@ function validarForm(){
 	        $('#password').val("");
 	        $('#cpassword').val("");
 	    }
+}
+
+function cambiodepagina(){
+  window.location.href = "home.html";
 }

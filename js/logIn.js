@@ -27,21 +27,26 @@ function SubForm () {
         localStorage.setItem("nombre",nombre);
         localStorage.setItem("apellido",apellido);
         console.log(data);
-        alert("Iniciaste sesión");
-        window.location.href = "notes.html";
+
+          alertify.success("Iniciaste Sesion");
+        setTimeout('cambiodepagina()',2000);
+
+
       },
       error: function(data) {
         if (data.status == 400) {
-          alert("Usuario o Contraseña invalida");
+          alertify.error("Usuario o Contraseña invalida");
         }else if (data.status == 403) {
-          alert("Usuario Bloqueado");
+          alertify.log("Usuario Bloqueado");
         }else if (data.status == 429){
-          alert("Excedio el numero de intentos. Este Usuario ha sido bloqueado");
+          alertify.log("Excedio el numero de intentos. Este Usuario ha sido bloqueado");
         }else{
-          alert("Servicio en mantenimiento. Intente mas tarde");
+          alertify.log("Servicio en mantenimiento. Intente mas tarde");
         }
-      }
+      },
+
     });
+
 }
 
 
@@ -76,10 +81,10 @@ function validarForm(){
       ]);
       $('#usuario').val("");
 
-  }else if (username.length < 6) {
+  }else if (username.length < 3) {
   $(document).trigger("set-alert-id-usuario", [
   {
-    message: "Debe ingresar al menos 6 caracteres",
+    message: "Debe ingresar al menos 3 caracteres",
     priority: "error"
   }
   ]);
@@ -94,23 +99,23 @@ function validarForm(){
   if (password.length < 1) {
     $(document).trigger("set-alert-id-password", [
     {
-      message: "Debe ingresar una contrase;a",
+      message: "Debe ingresar una contraseña",
       priority: "error"
     }
     ]);
     $('#password').val("");
-  }else if ((password.length < 8) && (password.match(checkPassword))) {
+  }else if ((password.length < 7) && (password.match(checkPassword))) {
     $(document).trigger("set-alert-id-password", [
     {
-      message: "Debe ingresar al menos 8 caracteres",
+      message: "Debe ingresar al menos 7 caracteres",
       priority: "error"
     }
     ]);
     $('#password').val("");
-  }else if ((password.length < 8) && (!password.match(checkPassword))) {
+  }else if ((password.length < 7) && (!password.match(checkPassword))) {
     $(document).trigger("set-alert-id-password", [
     {
-      message: "Debe ingresar al menos 8 caracteres. No se aceptan caracteres especiales",
+      message: "Debe ingresar al menos 7 caracteres. No se aceptan caracteres especiales",
       priority: "error"
     }
     ]);
@@ -130,4 +135,8 @@ function validarForm(){
 
 <!---------------------------------------------------------------------------------------------------------------->
 
+}
+
+function cambiodepagina(){
+  window.location.href = "notes.html";
 }
