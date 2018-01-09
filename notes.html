@@ -12,16 +12,23 @@
   <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
   <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <script type="text/javascript">
+    var token =localStorage.getItem("x-auth"); //TODO: X-AUTH
+    if(token){
+    }else{
+      window.location.href = "logIn.html";
+    }
+  </script>
+
 </head>
 <body>
   <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h1 id="perfil">Welcome:</h1><br>
+        <h1 id="perfil">Bienvenido:</h1><br>
+        <h3 id="nombreApellido"></h3>
         <h4 id="usuario"></h4>
-        <h4 id="nombre"></h4>
-        <h4 id="apellido"></h4>
       </div>
       <ul class="list-unstyled components">
         <li>
@@ -59,14 +66,14 @@
         </select>
         </div>
         <div class="col-lg-1">
-          <button ng-click="add(input,input1,date,Categoria)" class="btn btn-block">Add Todo</button>
+          <button ng-click="add(input,input1,input2,Categoria)" class="btn btn-block">Add Todo</button>
         </div>
       </div>
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="todo in todos">
           <button ng-click="remove(todo)" class="btn glyphicon glyphicon-remove"></button>
           <button ng-click="editing = editing ? null : todo" class="btn glyphicon glyphicon-pencil"></button>
-          <input type="checkbox" ng-model="todo.done" />
+          <button ng-click="completeTask(todo)" ng-disabled:"isDisabled" class="btn glyphicon glyphicon-ok"/></button>
           <center><span class="done-{{todo.done}}" id="Tittle" ng-if="editing !== todo">{{ todo.title }}</span></center><br>
           <center><span class="done-{{todo.done}}" id="Description" ng-if="editing !== todo">{{ todo.description }}</span></center><br>
           <center><span class="done-{{todo.done}}" id="Date" ng-if="editing !== todo">{{ todo.date }}</span></center><br>
@@ -91,6 +98,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/prettify.js"></script>
   <script src="js/jquery.bsFormAlerts.js"></script>
+  <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
+  <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/ngAlertify.js"></script>
 
   <script type="text/javascript">
     $(document).ready(function(){
