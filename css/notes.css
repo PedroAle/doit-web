@@ -46,13 +46,9 @@ body {
   color: #85c1e9;
 }
 
-li input[type="checkbox"] {
-  width: 20px;
-}
-
 .done-true {
   text-decoration: line-through;
-  color:gray;
+  color: gray;
 }
 
 h2{
@@ -88,6 +84,10 @@ a:hover{
 }
 
 h4{
+  text-align: center;
+}
+
+h3{
   text-align: center;
 }
 

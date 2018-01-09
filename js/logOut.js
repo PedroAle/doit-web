@@ -10,6 +10,7 @@ function logO(){
       localStorage.removeItem("usuario");
       localStorage.removeItem("nombre");
       localStorage.removeItem("apellido");
+      localStorage.removeItem("x-auth");
       window.location.href = "home.html";
     },
     error: function(response) {}
